@@ -9,7 +9,7 @@
           <div class="col">
                 <h1>
                       @isset($data['title'])
-                          Category | {{ $data['title'] }}
+                           {{ $data['title'] }}
                           @else
                           All Posts
                       @endisset
@@ -25,7 +25,7 @@
                         <div class="card border border-danger shadow-sm p-3">
                               <div class="card-body ">
                                     <h5 class="text-capitalize mb-2">{{ $post->title }}</h5>
-                                    <small class="mb-3 d-block">Category : {{ $post->category->name }} | by : {{ $post->user->name }}</small>
+                                    <small class="mb-3 d-block">Category : {{ $post->category->name }} | by : <a href="{{ route('authors.show', $post->user->username) }}">{{ $post->user->name }}</a></small>
                                     <div class="mb-3">
                                           {!! $post->excerpt !!}
                                     </div>

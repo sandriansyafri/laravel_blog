@@ -47,9 +47,9 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        $posts = $category->posts;
+        $posts = $category->posts->load('category', 'user');
         $data = [
-            'title' =>  $category->name,
+            'title' =>  'Category | ' . $category->name,
         ];
         return view('page.frontend.posts.index', compact(['posts', 'data']));
     }

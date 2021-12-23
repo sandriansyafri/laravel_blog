@@ -48,9 +48,9 @@
                 </li>
                 <li class="nav-item">
                     <a
-                        class="nav-link {{ request()->is('categories*') ? 'active' : '' }}"
+                        class="nav-link {{ request()->is('authors*') ? 'active' : '' }}"
                         aria-current="page"
-                        href="{{ route('categories.index') }}"
+                        href="{{ route('authors.index') }}"
                         >Authors</a
                     >
                 </li>
