@@ -30,6 +30,14 @@
                         >About</a
                     >
                 </li>
+                <li class="nav-item">
+                    <a
+                        class="nav-link {{ request()->is('posts*') ? 'active' : '' }}"
+                        aria-current="page"
+                        href="{{ route('posts.index') }}"
+                        >Posts</a
+                    >
+                </li>
             </ul>
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
