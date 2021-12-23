@@ -38,6 +38,22 @@
                         >Posts</a
                     >
                 </li>
+                <li class="nav-item">
+                    <a
+                        class="nav-link {{ request()->is('categories*') ? 'active' : '' }}"
+                        aria-current="page"
+                        href="{{ route('categories.index') }}"
+                        >Categories</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a
+                        class="nav-link {{ request()->is('categories*') ? 'active' : '' }}"
+                        aria-current="page"
+                        href="{{ route('categories.index') }}"
+                        >Authors</a
+                    >
+                </li>
             </ul>
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
