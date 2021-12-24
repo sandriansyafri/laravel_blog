@@ -1,4 +1,4 @@
-@extends('layout.frontend.main')
+@extends('layout.frontend.main') 
 
 @section('title')
     Categories
@@ -6,24 +6,20 @@
 
 @section('content')
 <div class="row mb-3">
-      <div class="col">
-            <h1>Categories</h1>
+    <div class="col text-center">
+        <h1>Categories</h1>
+    </div>
+</div>
+
+<div class="row justify-content-center"> 
+      <div class="col-6">
+            <ul class="list-group">
+                  @foreach ($categories as $category)
+                  <li class="list-group-item border border-danger p-3">
+                        <a href="{{ url('posts?category=' . $category->slug) }}" class="nav-link p-0 text-danger">{{ $category->name }}</a>
+                  </li>
+                  @endforeach
+            </ul>
       </div>
 </div>
-    <div class="row">
-          <div class="col">
-                <ul class="list-group list-group-flush ">
-                 @foreach ($categories as $category)
-                 <li class="list-group-item border-0 border-bottom border-danger">
-                  <a href="{{ route('categories.show',$category->slug) }}" class="nav-link p-0 text-secondary">
-                      <h5>
-                        {{ $category->name }}
-                      </h5>
-                  </a>
-            </li>
-                 @endforeach
-                   
-                </ul>
-          </div>
-    </div>
 @endsection

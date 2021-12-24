@@ -16,10 +16,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(10)->create();
+        $this->call([UserSeeder::class]);
         Category::create(['name' => 'Space', 'slug' => 'space']);
         Category::create(['name' => 'White', 'slug' => 'white']);
         Category::create(['name' => 'Work', 'slug' => 'work']);
-        Post::factory(20)->create();
+        Post::factory(10)->create();
     }
 }

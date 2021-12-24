@@ -1,29 +1,25 @@
-@extends('layout.frontend.main')
+@extends('layout.frontend.main') 
 
 @section('title')
-    Categories
+    Authors
 @endsection
 
 @section('content')
 <div class="row mb-3">
-      <div class="col">
-            <h1>Authors</h1>
+    <div class="col text-center">
+        <h1>Authors</h1>
+    </div>
+</div>
+
+<div class="row justify-content-center"> 
+      <div class="col-6">
+            <ul class="list-group">
+                  @foreach ($authors as $author)
+                  <li class="list-group-item border border-danger p-3">
+                        <a href="{{ url('posts?author=' . $author->username) }}" class="nav-link p-0 text-danger">{{ $author->name }}</a>
+                  </li>
+                  @endforeach
+            </ul>
       </div>
 </div>
-    <div class="row">
-          <div class="col">
-                <ul class="list-group list-group-flush ">
-                 @foreach ($authors as $author)
-                 <li class="list-group-item border-0 border-bottom border-danger">
-                  <a href="{{ route('authors.show', $author->username) }}" class="nav-link p-0 text-secondary">
-                      <h5>
-                        {{ $author->name }}
-                      </h5>
-                  </a>
-            </li>
-                 @endforeach
-                   
-                </ul>
-          </div>
-    </div>
 @endsection

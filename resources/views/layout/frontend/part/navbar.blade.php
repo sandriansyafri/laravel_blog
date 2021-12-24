@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-danger mb-4 py-3">
+<nav class="navbar navbar-expand-lg navbar-dark bg-danger mb-5 py-3">
     <div class="container">
-        <a class="navbar-brand" href="#">Blog</a>
+        <a class="navbar-brand" hPref="#">Blog</a>
         <button
             class="navbar-toggler"
             type="button"
@@ -17,7 +17,6 @@
                 <li class="nav-item">
                     <a
                         class="nav-link {{ request()->is('/') ? 'active' : '' }}"
-                        aria-current="page"
                         href="{{ route('home') }}"
                         >Home</a
                     >
@@ -25,7 +24,6 @@
                 <li class="nav-item">
                     <a
                         class="nav-link {{ request()->is('about') ? 'active' : '' }}"
-                        aria-current="page"
                         href="{{ route('about') }}"
                         >About</a
                     >
@@ -33,7 +31,6 @@
                 <li class="nav-item">
                     <a
                         class="nav-link {{ request()->is('posts*') ? 'active' : '' }}"
-                        aria-current="page"
                         href="{{ route('posts.index') }}"
                         >Posts</a
                     >
@@ -41,7 +38,6 @@
                 <li class="nav-item">
                     <a
                         class="nav-link {{ request()->is('categories*') ? 'active' : '' }}"
-                        aria-current="page"
                         href="{{ route('categories.index') }}"
                         >Categories</a
                     >
@@ -49,7 +45,6 @@
                 <li class="nav-item">
                     <a
                         class="nav-link {{ request()->is('authors*') ? 'active' : '' }}"
-                        aria-current="page"
                         href="{{ route('authors.index') }}"
                         >Authors</a
                     >

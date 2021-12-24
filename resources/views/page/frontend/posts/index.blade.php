@@ -1,43 +1,156 @@
-@extends('layout.frontend.main')
-
-@section('title')
-    Posts
-@endsection
-
+@extends('layout.frontend.main') @section('title') Posts @endsection
 @section('content')
-    <div class="row mb-3">
-          <div class="col">
-                <h1>
-                      @isset($data['title'])
-                           {{ $data['title'] }}
-                          @else
-                          All Posts
-                      @endisset
-                </h1>
-          </div>
+<div class="row ">
+    <div class="col text-center">
+        @isset($title)
+        <h1>{{ $title }}</h1>
+        @endisset
     </div>
+</div>
 
-    <div class="row">
-          <div class="col p-0">
-                <ul class="list-group">
-                     @foreach ($posts as $post)
-                     <li class="list-group-item border-0 mb-3">
-                        <div class="card border border-danger shadow-sm p-3">
-                              <div class="card-body ">
-                                    <h5 class="text-capitalize mb-2">{{ $post->title }}</h5>
-                                    <small class="mb-3 d-block">Category : {{ $post->category->name }} | by : <a href="{{ route('authors.show', $post->user->username) }}">{{ $post->user->name }}</a></small>
-                                    <div class="mb-3">
-                                          {!! $post->excerpt !!}
-                                    </div>
-                                    <div class="mb-3">
-                                          <a href="{{ route('posts.show',$post->slug) }}" class="btn btn-danger shadow-sm py-2 px-5">Read more</a>
-                                    </div>
-                              </div>
-                        </div>
-                  </li>
-                     @endforeach
-                </ul>
-          </div>
+<div class="row justify-content-center my-4">
+      <div class="col-8">
+           <form action="{{ route('posts.index') }}">
+            <div class="input-group">
+                @if (request('category'))
+                <input type="hidden"  name="category" value="{{ request('category') }}" >
+                @elseif(request('author'))
+                <input type="hidden"  name="author" value="{{ request('author') }}" >
+                @endif
+                  <input type="text" class="form-control rounded-0 border border-danger" name="search" value="{{ request('search') }}" placeholder="keywords : title">
+                  <button type="submit" class="btn btn-outline-danger rounded-0">Search</button>
+            </div>
+           </form>
+      </div>
+</div>
+
+@if ($posts->count())
+<div class="row mb-4">
+    <div class="col">
+        <div class="card rounded-0 border border-danger">
+            <div class="card-body p-4">
+                <small class="fw-bold d-inline-block mb-3">
+                    Author :
+                    <span class="ms-2">
+                        <a
+                            href="{{ url('posts?author=' . $posts[0]->author->username) }}"
+                            class="text-decoration-none fw-normal text-danger"
+                        >
+                            {{ $posts[0]->author->name }}
+                        </a>
+                    </span>
+                </small>
+                <h4 class="text-capitalize text-danger">
+                    @if (strlen($posts[0]->title) > 15)
+                    {{ Str::substr($posts[0]->title, 0, 10) }} ... @else
+                    {{ $posts[0]->title }}
+                    @endif
+                </h4>
+
+                <div class="fs-6 mb-3">
+                    {!! Str::substr($posts[0]->excerpt, 0, 100) !!}
+                </div>
+
+                <small class="fw-bold d-inline-block mb-3">
+                    Category :
+                    <span class="ms-2">
+                        <a
+                            href="{{ url('posts?category=' . $posts[0]->category->slug)  }}"
+                            class="text-decoration-none fw-normal text-danger"
+                        >
+                            {{ $posts[0]->category->name }}
+                        </a>
+                    </span>
+                </small>
+
+                <a
+                    href="{{ route('posts.show',$posts[0]->slug) }}"
+                    class="btn btn-danger rounded-0 btn-sm w-100"
+                    >Read</a
+                >
+            </div>
+        </div>
     </div>
+</div>
+@else
+<div class="row mt-5">
+    <div class="col text-center">
+        <p class="lead fs-4">(empty)</p>
+    </div>
+</div>
+@endif
+
+<div class="row justify-content-center">
+    <div class="col-12">
+        <div class="row">
+            @foreach ($posts->skip(1) as $post)
+            <div class="col-4 mb-4">
+                <div class="card rounded-0 border border-danger">
+                    <div class="card-body p-4">
+                        <small class="fw-bold d-inline-block mb-3">
+                            Author :
+                            <span class="ms-2">
+                                <a
+                                    href="{{ url('posts?author=' . $post->author->username) }}"
+                                    class="
+                                        text-decoration-none
+                                        fw-normal
+                                        text-danger
+                                    "
+                                >
+                                    {{ $post->author->name }}
+                                </a>
+                            </span>
+                        </small>
+                        <h4 class="text-capitalize text-danger">
+                            @if (strlen($post->title) > 15)
+                            {{ Str::substr($post->title, 0, 10) }} ...
+                             @else
+                            {{ $post->title }}
+                            @endif
+                        </h4>
+
+                        <div class="fs-6 mb-3">
+                              @if (strlen($post->excerpt) > 80)
+                                  {!! substr($post->excerpt,0,80) !!}
+                              @else 
+                                    {!! $post->excerpt !!}
+                              @endif
+                        </div>
+
+                        <small class="fw-bold d-inline-block mb-3">
+                            Category :
+                            <span class="ms-2">
+                                <a
+                                    href="{{ url('posts?category=' . $post->category->slug) }}"
+                                    class="
+                                        text-decoration-none
+                                        fw-normal
+                                        text-danger
+                                    "
+                                >
+                                    {{ $post->category->name }}
+                                </a>
+                            </span>
+                        </small>
+
+                        <a
+                            href="{{ route('posts.show',$post->slug) }}"
+                            class="btn btn-danger rounded-0 btn-sm w-100"
+                            >Read</a
+                        >
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col d-flex justify-content-center">
+        {{ $posts->links() }}
+    </div>
+</div>
 
 @endsection
