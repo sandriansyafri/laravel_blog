@@ -51,9 +51,30 @@
                 </li>
             </ul>
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Login</a>
-                </li>
+                @auth
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <a class="nav-link p-0 bg-transparent dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                              Hello , {{ auth()->user()->name }}
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                              <li><a class="dropdown-item" href="{{ route('dashboard.index') }}">Dashboard</a></li>
+                              <li><hr class="dropdown-divider"></li>
+                              <li>
+                                  <form action="{{ route('logout') }}" method="post">
+                                      @csrf
+                                      <button type="submit" class="dropdown-item" >Logout</button>
+                                  </form>
+                              </li>
+                            </ul>
+                          </div>
+                    </li>
+                @endauth
+             @guest
+             <li class="nav-item ">
+                <a class="nav-link {{ request()->is('login*') ? 'active' : '' || request()->is('register*') ? 'active' : '' }}"  href="{{ route('login') }}">Login</a>
+            </li>
+             @endguest
             </ul>
         </div>
     </div>

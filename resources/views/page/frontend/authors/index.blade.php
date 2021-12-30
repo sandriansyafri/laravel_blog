@@ -12,7 +12,7 @@
 </div>
 
 <div class="row justify-content-center"> 
-      <div class="col-6">
+      <div class="col col-md-6">
             <ul class="list-group">
                   @foreach ($authors as $author)
                   <li class="list-group-item border border-danger p-3">

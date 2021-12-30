@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\DashboardCategoryController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\StaticPageController;
 use App\Models\Category;
 use App\Models\User;
@@ -23,6 +27,26 @@ Route::get('authors', function () {
             'authors' => User::all()
       ]);
 })->name('authors.index');
+
+Route::get('/login', LoginController::class)->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'login']);
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/register', RegisterController::class)->name('register');
+Route::post('/register', [RegisterController::class, 'register']);
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index')->middleware('auth');
+Route::get('/dashboard/posts', [DashboardController::class, 'postsIndex'])->name('dashboard.posts.index')->middleware('auth');
+Route::get('/dashboard/posts/create', [DashboardController::class, 'postsCreate'])->name('dashboard.posts.create')->middleware('auth');
+Route::get('/dashboard/posts/check-slug', [DashboardController::class, 'postsCheckSlug'])->middleware('auth');
+Route::get('/dashboard/posts/{post:slug}', [DashboardController::class, 'postsShow'])->name('dashboard.posts.show')->middleware('auth');
+Route::get('/dashboard/posts/{post:slug}/edit', [DashboardController::class, 'postsEdit'])->name('dashboard.posts.edit')->middleware('auth');
+Route::post('/dashboard/posts', [DashboardController::class, 'postsStore'])->name('dashboard.posts.store')->middleware('auth');
+Route::put('/dashboard/posts/{post:id}', [DashboardController::class, 'postsUpdate'])->name('dashboard.posts.update')->middleware('auth');
+Route::delete('/dashboard/posts/{post:id}', [DashboardController::class, 'postsDestroy'])->name('dashboard.posts.destory')->middleware('auth');
+
+Route::resource('dashboard/categories', DashboardCategoryController::class, [
+      'as' => 'dashboard'
+])->except(['show'])->middleware(['auth', 'isAdmin']);
 
 
 // @ GAK DI PAKE KARENA ADA REQUEST DARI POST 

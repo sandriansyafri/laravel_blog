@@ -27,6 +27,11 @@
 @if ($posts->count())
 <div class="row mb-4">
     <div class="col">
+        @if ($posts[0]->image)
+            <img class="card-img-top" height="350" src="{{ asset('assets/images/posts/' . $posts[0]->image) }}" alt="">
+            @else
+            <img class="card-img-top" height="350" src="{{ asset('assets/images/posts/blank.jpg') }}" alt="">
+        @endif
         <div class="card rounded-0 border border-danger">
             <div class="card-body p-4">
                 <small class="fw-bold d-inline-block mb-3">
@@ -84,8 +89,13 @@
     <div class="col-12">
         <div class="row">
             @foreach ($posts->skip(1) as $post)
-            <div class="col-4 mb-4">
+            <div class="col-12 col-md-4 mb-4">
                 <div class="card rounded-0 border border-danger">
+                    @if ($post->image)
+                        <img class="card-img-top" height="200" src="{{ asset('assets/images/posts/' . $post->image) }}" alt="">
+                        @else
+                        <img class="card-img-top" height="200" src="{{ asset('assets/images/posts/blank.jpg') }}" alt="">
+                    @endif
                     <div class="card-body p-4">
                         <small class="fw-bold d-inline-block mb-3">
                             Author :
