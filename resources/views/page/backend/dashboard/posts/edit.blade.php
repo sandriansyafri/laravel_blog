@@ -110,7 +110,7 @@
 
     title.addEventListener("change", function (e) {
         let data = e.target.value;
-        fetch(`http://127.0.0.1:8000/dashboard/posts/check-slug?title=${data}`)
+        fetch(`http://stormy-hamlet-57258.herokuapp.com/dashboard/posts/check-slug?title=${data}`)
             .then((res) => res.json())
             .then((res) => (slug.value = res.slug));
     });
