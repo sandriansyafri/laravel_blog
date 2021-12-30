@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,6 +18,13 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([UserSeeder::class]);
+        User::create([
+            'name' => 'admin',
+            'username' => 'admin',
+            'email' => 'admin@gmail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('password'),
+        ]);
         Category::create(['name' => 'Space', 'slug' => 'space']);
         Category::create(['name' => 'White', 'slug' => 'white']);
         Category::create(['name' => 'Work', 'slug' => 'work']);
