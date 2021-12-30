@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([UserSeeder::class]);
         User::create([
             'name' => 'admin',
             'username' => 'admin',
@@ -25,6 +24,8 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
         ]);
+        $this->call([UserSeeder::class]);
+
         Category::create(['name' => 'Space', 'slug' => 'space']);
         Category::create(['name' => 'White', 'slug' => 'white']);
         Category::create(['name' => 'Work', 'slug' => 'work']);
