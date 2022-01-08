@@ -20,7 +20,7 @@ class PostController extends Controller
             $title = " in " . $author;
         }
         return view('page.frontend.posts.index', [
-            'posts' => Post::filter(request(['search', 'category', 'author']))->latest()->paginate(5)->withQueryString(),
+            'posts' => Post::filter(request(['search', 'category', 'author']))->latest()->paginate(7)->withQueryString(),
             'title' => 'Posts' . $title
         ]);
     }

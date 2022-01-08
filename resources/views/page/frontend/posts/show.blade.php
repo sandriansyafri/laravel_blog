@@ -21,6 +21,15 @@
 
 <div class="row justify-content-center ">
       <div class="col-12 border border-danger p-5 rounded-0">
+        @if ($post->image)
+        <div class="text-center mb-5">
+          <img src="{{ asset('assets/images/posts/' . $post->image) }}" alt="">
+        </div>
+          @else
+          <div class="text-center mb-5">
+            <img src="{{ asset('assets/images/posts/blank.png') }}" alt="">
+          </div>
+        @endif
           <p class="mb-3">
               <span class="fw-bold">Category : </span> 
               <a href="{{ url('posts?category=' . $post->category->slug) }}" class="nav-link d-inline p-0 text-danger">

@@ -5,13 +5,13 @@
 @endsection
 
 @section('content')
-<div class="row mb-3">
+<div class="row mb-2">
     <div class="col text-center">
         <h1>Authors</h1>
     </div>
 </div>
 
-<div class="row justify-content-center"> 
+<div class="row justify-content-center pb-5"> 
       <div class="col col-md-6">
             <ul class="list-group">
                   @foreach ($authors as $author)
@@ -22,4 +22,4 @@
             </ul>
       </div>
 </div>
-@endsection
+@endsection 

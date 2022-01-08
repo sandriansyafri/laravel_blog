@@ -14,7 +14,10 @@ class DashboardController extends Controller
 
     public function index()
     {
-        return view('page.backend.dashboard');
+        $count = [
+            'post' => Post::where('user_id', auth()->id())->count()
+        ];
+        return view('page.backend.dashboard', compact(['count']));
     }
     public function postsIndex()
     {
@@ -117,8 +120,9 @@ class DashboardController extends Controller
     {
 
         $file = $request->file('image');
-        $fileName = $file->getClientOriginalName();
+        $fileName = $file ? $file->getClientOriginalName() : '';
         $fileName = time() . '-' . $fileName;
+
         $path = public_path('assets/images/posts');
 
         $rules = [

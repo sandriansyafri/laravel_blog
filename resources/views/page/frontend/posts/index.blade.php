@@ -27,13 +27,18 @@
 @if ($posts->count())
 <div class="row mb-4">
     <div class="col">
-        @if ($posts[0]->image)
-            <img class="card-img-top" height="350" src="{{ asset('assets/images/posts/' . $posts[0]->image) }}" alt="">
+       
+        <div class="card rounded-0 border border-danger text-center">
+            @if ($posts[0]->image)
+            <div class="text-center p-5">
+                <img class="card-img-top"  style="width: 300px !important" src="{{ asset('assets/images/posts/' . $posts[0]->image) }}" alt="">
+            </div>
             @else
-            <img class="card-img-top" height="350" src="{{ asset('assets/images/posts/blank.jpg') }}" alt="">
+         <div class="text-center">
+            <img class="card-img-top text-center" height="300" style="width: 300px !important"   src="{{ asset('assets/images/posts/blank.png') }}" alt="#">
+         </div>
         @endif
-        <div class="card rounded-0 border border-danger">
-            <div class="card-body p-4">
+            <div class="card-body ">
                 <small class="fw-bold d-inline-block mb-3">
                     Author :
                     <span class="ms-2">
@@ -92,9 +97,9 @@
             <div class="col-12 col-md-4 mb-4">
                 <div class="card rounded-0 border border-danger">
                     @if ($post->image)
-                        <img class="card-img-top" height="200" src="{{ asset('assets/images/posts/' . $post->image) }}" alt="">
+                        <img class="card-img-top" height="300"  src="{{ asset('assets/images/posts/' . $post->image) }}" alt="">
                         @else
-                        <img class="card-img-top" height="200" src="{{ asset('assets/images/posts/blank.jpg') }}" alt="">
+                        <img class="card-img-top" height="300"  src="{{ asset('assets/images/posts/blank.png') }}" alt="">
                     @endif
                     <div class="card-body p-4">
                         <small class="fw-bold d-inline-block mb-3">
